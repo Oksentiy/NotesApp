@@ -1,23 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import NotesList from './components/notesList/NotesList';
 
-function App() {
+import './App.css'
+
+const  App = () => {
+  const [notes, setNotes] = useState([
+    {
+      id: uuidv4(),
+      text: "То є моя перша замітка!",
+      date: '01/08/2022'
+    },
+    {
+      id: uuidv4(),
+      text: "То є моя друга замітка!",
+      date: '01/08/2022'
+    }
+  ]);
+
+  const addNote = (text) => {
+    const date = new Date()
+    const newNote = {
+      id: uuidv4(),
+      text,
+      date: date.toLocaleTimeString()
+    }
+    const newNotes = [...notes, newNote]
+    setNotes(newNotes)
+  }
+
+  const deleteNote = (id) => {
+    const newNotes = notes.filter((note) => note.id !== id)
+    setNotes(newNotes)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <NotesList 
+        notes={notes} 
+        handleAddNote={addNote}
+        handleDeleteNote={deleteNote}
+      />
     </div>
   );
 }
