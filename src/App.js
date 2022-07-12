@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import NotesList from './components/notesList/NotesList';
-import AddNoteBtn from './components/addNoteBtn/AddNoteBtn';
+// import AddNoteBtn from './components/addNoteBtn/AddNoteBtn';
 import SearchNote from './components/searchNote/SearchNote';
-
+import Header from './components/header/Header';
 import './App.css'
 
 const  App = () => {
@@ -20,6 +20,9 @@ const  App = () => {
     }
   ]);
 
+  const [searchText, setSearchText] = useState('');
+
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(()=> {
     const savedNotes = JSON.parse(
@@ -56,14 +59,19 @@ const  App = () => {
   // const [openModal, setOpenModal] = useState()
 
   return (
-    <div className="container">
-      <AddNoteBtn/>
-      <SearchNote/>
-      <NotesList 
-        notes={notes} 
-        handleAddNote={addNote}
-        handleDeleteNote={deleteNote}
-      />
+    <div className={`${darkMode && 'dark-mode'}`}>
+      <div className="container">
+      {/* <AddNoteBtn/> */}
+        <Header handleToggleDarkMode={setDarkMode}/>
+        <SearchNote handleSearchNote={setSearchText}/>
+        <NotesList 
+          notes={notes.filter((note)=>
+            note.text.toLocaleLowerCase().includes(searchText) 
+          )} 
+          handleAddNote={addNote}
+          handleDeleteNote={deleteNote}
+        />
+      </div>
     </div>
   );
 }
