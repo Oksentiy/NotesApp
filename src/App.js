@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import NotesList from './components/notesList/NotesList';
+import AddNoteBtn from './components/addNoteBtn/AddNoteBtn';
+import SearchNote from './components/searchNote/SearchNote';
 
 import './App.css'
 
@@ -18,6 +20,23 @@ const  App = () => {
     }
   ]);
 
+
+  useEffect(()=> {
+    const savedNotes = JSON.parse(
+      localStorage.getItem('react-notes-app-data')
+    );
+
+    if(savedNotes) {
+      setNotes(savedNotes)
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem(
+      'react-notes-app-data', 
+      JSON.stringify(notes))
+  }, [notes])
+
   const addNote = (text) => {
     const date = new Date()
     const newNote = {
@@ -34,8 +53,12 @@ const  App = () => {
     setNotes(newNotes)
   }
 
+  // const [openModal, setOpenModal] = useState()
+
   return (
     <div className="container">
+      <AddNoteBtn/>
+      <SearchNote/>
       <NotesList 
         notes={notes} 
         handleAddNote={addNote}
