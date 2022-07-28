@@ -7,45 +7,30 @@ import Header from './components/header/Header';
 import './App.css'
 
 const  App = () => {
-  const [notes, setNotes] = useState([
-    {
-      id: uuidv4(),
-      text: "То є моя перша замітка!",
-      date: '01/08/2022'
-    },
-    {
-      id: uuidv4(),
-      text: "То є моя друга замітка!",
-      date: '01/08/2022'
-    }
-  ]);
+  const loadedTodos = localStorage.getItem("notes-data")
+  ? JSON.parse(localStorage.getItem("notes-data"))
+  : [];
+
+  const [notes, setNotes] = useState(loadedTodos);
+ 
+  useEffect(() => {
+    localStorage.setItem(
+      'notes-data', 
+      JSON.stringify(notes))
+  },[notes]);
 
   const [searchText, setSearchText] = useState('');
 
   const [darkMode, setDarkMode] = useState(false);
 
-  useEffect(()=> {
-    const savedNotes = JSON.parse(
-      localStorage.getItem('react-notes-app-data')
-    );
-
-    if(savedNotes) {
-      setNotes(savedNotes)
-    }
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem(
-      'react-notes-app-data', 
-      JSON.stringify(notes))
-  }, [notes])
-
   const addNote = (text) => {
     const date = new Date()
+    const NoTimeDate = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
+    
     const newNote = {
       id: uuidv4(),
       text,
-      date: date.toLocaleTimeString()
+      date: NoTimeDate
     }
     const newNotes = [...notes, newNote]
     setNotes(newNotes)
