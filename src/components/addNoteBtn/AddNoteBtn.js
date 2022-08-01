@@ -1,10 +1,11 @@
-import AddNote from "../addNote/AddNote";
+// import { useState } from 'react'
+// import './addNoteBtn.css'
 
-function AddNoteBtn ()  {
-  return (
-    <>
-      <button className="btn-create" onClick={AddNote}>+</button>
-    </>
-  )
-}
-export default AddNoteBtn;
+// const AddNoteBtn = ()=>  {
+
+//   return (
+//     <button className="btn-create" >+</button>
+//   )
+// }
+
+// export default AddNoteBtn;

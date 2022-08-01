@@ -11,3 +11,22 @@
 .dark-mode h1 {
   color: white;
 }
+
+.day-night-btn {
+  width: 80px;
+  height: 30px;
+  background-color: #e1e1e1;
+  border: none;
+  border-radius: 15px;
+  padding: 5px 10px;
+}
+
+.day-night-btn:hover {
+  background-color: #ededed;
+  cursor: pointer;
+}
+
+.day-night-btn:active {
+  width: 78px;
+  height: 28px;
+}

@@ -1,0 +1,76 @@
+.note {
+  width: 250px;
+  height: 150px;
+}
+
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.note.new {
+  background-color: #67d7cc;
+  overflow: hidden;
+  /* position: fixed;
+  top: 30%;
+  left: 44%; */
+}
+
+textarea {
+  border: none;
+  resize: none;
+  background-color: #67d7cc;
+  width: 100%;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.note-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.note-top {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.save-modal-btn {
+  width: 80px;
+  height: 30px;
+  background-color: #e1e1e1;
+  border: none;
+  border-radius: 15px;
+  padding: 5px 10px;
+}
+
+.save-modal-btn:hover {
+  background-color: #ededed;
+  cursor: pointer;
+}
+
+.save-modal-btn:active {
+  width: 78px;
+  height: 28px;
+}
+
+.close-modal-btn {
+  width: 15px;
+  background: none;
+  border: none;
+}
+
+.close-modal-btn:hover {
+  cursor: pointer;
+}

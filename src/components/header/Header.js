@@ -10,7 +10,7 @@ const Header = ({handleToggleDarkMode}) => {
             (previousDarkMode) => !previousDarkMode
           )
         } 
-        className="save">день/ніч</button>
+        className="day-night-btn">день/ніч</button>
     </div>
   )
 }

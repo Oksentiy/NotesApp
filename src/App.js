@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import NotesList from './components/notesList/NotesList';
 // import AddNoteBtn from './components/addNoteBtn/AddNoteBtn';
+import ModalAddNote from './components/modalAddNote/ModalAddNote';
 import SearchNote from './components/searchNote/SearchNote';
 import Header from './components/header/Header';
 import './App.css'
@@ -41,21 +42,30 @@ const  App = () => {
     setNotes(newNotes)
   }
 
-  // const [openModal, setOpenModal] = useState()
+  const [showModal, setShowModal] = useState(false)
+
+  const openModal = () => {
+    setShowModal(true)
+  }
+  const closeModal = () => {
+    setShowModal(false)
+  }
 
   return (
-    <div className={`${darkMode && 'dark-mode'}`}>
-      <div className="container">
-      {/* <AddNoteBtn/> */}
+    <div className={darkMode && 'dark-mode'}>
+      <div className="container" >
         <Header handleToggleDarkMode={setDarkMode}/>
         <SearchNote handleSearchNote={setSearchText}/>
-        <NotesList 
-          notes={notes.filter((note)=>
-            note.text.toLocaleLowerCase().includes(searchText) 
-          )} 
-          handleAddNote={addNote}
-          handleDeleteNote={deleteNote}
-        />
+        <div className='notes-contaiter'>
+          <button className='btn-create' onClick={openModal}>+</button>
+          <NotesList 
+            notes={notes.filter((note)=>
+              note.text.toLocaleLowerCase().includes(searchText) 
+            )} 
+            handleDeleteNote={deleteNote}
+          />
+        </div>
+        <ModalAddNote showModal={showModal} setShowModal={setShowModal} handleAddNote={addNote} closeModal={closeModal}/>
       </div>
     </div>
   );
